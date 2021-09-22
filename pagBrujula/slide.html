@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Responsive Slider</title>
+	<meta charset='utf-8'>
+	<link rel="stylesheet" type="text/css" href="css/flexslider.css">
+	
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
+<script src="js/jquery.flexslider.js"></script>
+		<script type="text/javascript" charset="utf-8">
+			$(window).load(function() {
+			$('.flexslider').flexslider(
+			{
+				prevText: "",
+				nextText: "",
+				animation: "slide",
+				slideshowSpeed: 5000, 
+			});
+		});
+		</script>
+</head>
+<body style="background-color: #259FD2;">
+<div class="flexslider">
+  <ul class="slides">
+    <li>
+      <img src="img/por.png" />
+    </li>
+    <li>
+      <img src="img/por1.png" />
+    </li>
+    <li>
+      <img src="img/por2.jpg" />
+    </li>
+  </ul>
+</div>
+
+</body>
+</html>

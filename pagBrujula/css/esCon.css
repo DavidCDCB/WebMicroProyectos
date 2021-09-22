@@ -1,0 +1,101 @@
+p.ncen{
+	font-weight:bold;
+	font-size:20px;
+	text-align: center;
+	color: #000000;
+	font-family: 'Ubuntu', sans-serif;
+	margin:10px;
+}
+p.jus{
+	text-align : justify;
+	font-size:20px;
+	color: #000000;
+	font-family: 'Ubuntu', sans-serif;
+}
+
+object.face{
+	width:100%;
+	height:500px;
+}
+
+p.tit{
+	font-size:30px;
+	text-align: center;
+	color: black;
+	font-family: 'Ubuntu', sans-serif;
+}
+
+p.sub{
+	text-align: left;
+	color:black;
+	font-size:20px;
+}
+
+#art{
+	height:500px;
+	font-family: 'Ubuntu', sans-serif;
+}
+
+#dCon{
+	background-color: #ADCCFF;
+	padding: 5px;
+	margin-top: 10px;
+}
+
+button{
+	background-color: #A3C1D7;
+	color: balck; 
+	border-radius: 6px;
+	border: 2px solid #005C95;
+	font-weight: 600;
+	font-size: 20px;
+	padding: 5px;
+	transition-property: all;
+	transition-duration: 300ms;
+	transition-timing-function: ease-out;
+	transition-delay: 20ms;
+	text-align: center;
+}
+
+button:hover{
+	color: #1672B5;
+	background-color: white;
+	cursor:pointer;
+	
+}
+
+input, textarea{
+	margin: 1px;
+	background-color: white;
+	border-radius: 6px;
+	font-size:1em;
+	transition-property: all;
+	transition-duration: 300ms;
+	transition-timing-function: ease-out;
+	transition-delay: 20ms;
+	width: 15em;
+	margin-top: 10px;
+}
+
+input:focus{
+	margin: 5px;
+	background-color: white;
+	border-radius: 6px;
+	font-size:1em;
+	border: 2px solid #87cefa;
+	box-shadow: 5px 5px 5px rgba(24,24,24,.5);
+}
+
+textarea{
+	width: 15em;
+	height: 15em;
+}
+
+@media (max-width: 800px){
+	p.jus{
+		font-size:12px;
+	}
+}
+
+
+

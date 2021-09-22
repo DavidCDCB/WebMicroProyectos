@@ -1,0 +1,71 @@
+body{
+	background-color: black;
+	
+	background-repeat: no-repeat;
+	background-size: cover;
+	font-family: 'Chakra Petch', sans-serif;
+}
+
+.container, .container-fluid, .container-sm, .container-md, .container-lg, .container-xl  {
+    max-width: 600px;  
+}
+
+.contenido{
+    background-color:#1c1c1c;
+	box-shadow: 0 0 10px #6e11d4;
+}
+
+.colorVacio{
+    border-color: rgb(255, 0, 234) !important;
+    background-color: transparent !important;
+}
+
+.colorCero{
+    border-color:#07f2fa !important;
+    background-color: #07f2fa !important;
+}
+
+.colorUno{
+    border-color:rgb(7, 250, 128) !important;
+    background-color: rgb(7, 250, 128) !important;
+}
+.colorBlock{
+    border-color: gray !important;
+    background-color: gray !important;
+}
+
+
+.btn{
+    border-radius: 0.2em;
+}
+
+.btn-primary{
+    padding: 10px;
+    
+    margin: 1px;
+    border-color:#6e11d4;
+    color:#6e11d4;
+}
+
+.btn-primary:hover, .btn-primary:focus{
+
+	color:#8030d4;
+    
+}
+
+
+input{
+    text-align: right;
+}
+
+.form-control{
+    color: white !important;
+	font-size: 3em !important;
+}
+
+p{
+	font-size: 3em !important;
+	color: white !important;
+	border-color: #6e11d4;
+	text-shadow: 5px 5px rgb(255, 0, 234) !important;
+}

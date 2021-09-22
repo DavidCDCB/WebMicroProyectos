@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<title>Brisca</title>
+		<meta name="description" content="">
+		<meta name="author" content="satur">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
+		<meta name="viewport" content="width=device-width; initial-scale=1.0">
+		<link rel="shortcut icon" href="/favicon.ico">
+		<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+		
+	</head>
+	<style>
+		img {
+			height: 150px;
+		}
+		table{
+			text-align:center;
+			background-image: url("cartas/fon.jpg");
+			padding: 10px 20px;
+			border-radius:1em 0em  1em 0em;
+		}
+		td{
+			padding: 3px 10px;
+			color:white;
+			
+		}
+		.us:hover{
+			background-color:#96866F;
+			
+		}
+		body{
+			background-image: url("cartas/fondo.jpg");
+			background-size: 100%;
+		}
+		img{
+			border-radius:0.5em;
+		}
+		button{
+			width: 100%;
+			border-radius:1em 0em 1em 0em;
+			cursor: pointer;
+			font-family: 'Ubuntu', cursive;
+			font-size:30px; 
+			background-color:#383838;
+			color:white;
+		}
+	</style>
+	<body>
+		<div align="center" >
+		<table>
+			<td colspan="3" class="punC"></td>
+			<tr>
+				<td class="1c"><img src="cartas/r.jpg" ></td>
+				<td class="2c"><img src="cartas/r.jpg" ></td>
+				<td class="3c"><img src="cartas/r.jpg" ></td>
+			</tr>
+			<tr>
+				<td class="cu"></td>
+				<td class="vi"><img src="cartas/r.jpg" ></td>
+				<td class="cc"></td>
+			</tr>
+			<tr>
+				<td class="1u us"><img src="cartas/r.jpg" ></td>
+				<td class="2u us"><img src="cartas/r.jpg" ></td>
+				<td class="3u us"><img src="cartas/r.jpg" ></td>
+			</tr>
+			<td  colspan="3" class="punU"></td>
+			<tr><td  colspan="3"><button class="due"><img height="25" width="25">¡DUELO!</button></br></td></tr>
+		</table>
+		</div>
+		
+		<script>
+			class Carta{
+				constructor(t,n,p){
+					this.tipo=t;
+					this.num=n;
+					this.punt=p;
+				}
+			}
+			var tip=new Array(4);
+			tip[0]="Basto";
+			tip[1]="Espada";
+			tip[2]="Copa";
+			tip[3]="Oro";
+			
+			var barajaU=new Array(3);
+			var gbarajaU=new Array(40);
+			var barajaC=new Array(3);
+			var gbarajaC=new Array(40);
+			var triun="";
+			var ind=0;
+			var at,de,indat,indde,tur=1,indt;
+
+			function getRan(n) {
+				return Math.round(Math.random()*(n));
+			}
+			
+			function llenar(){
+				var mazo=new Array(40);
+				for (i = 0; i < tip.length; i++){
+					for (x = 1;x < 11;x++){
+						if(x==8) mazo[ind]=new Carta(tip[i],10,x);
+						else if(x==9) mazo[ind]=new Carta(tip[i],11,x);
+						else if(x==10) mazo[ind]=new Carta(tip[i],12,x);
+						else{ 
+							if(x==1)mazo[ind]=new Carta(tip[i],x,15);
+							else if(x==3)mazo[ind]=new Carta(tip[i],x,14);
+							else mazo[ind]=new Carta(tip[i],x,x);
+						}
+						ind++;
+					}
+				}
+				return mazo;
+			}
+
+			function Arras(baraja,mazo){
+				for (i = 0; i < baraja.length; i++){
+					do{
+						indCan=getRan(39);
+						if(mazo[indCan]!=null){
+							baraja[i]=mazo[indCan];
+							mazo[indCan]=null;
+							break;
+						}
+					}while(mazo[indCan]==null)
+				}
+			}
+
+			function contCa(mazo){
+				var est=false;
+				for (i = 0; i < mazo.length; i++)
+					if(mazo[i]!=null)est=true;
+				return est;
+			}
+
+			function Rep(baraja,mazo){
+				if(contCa(mazo)){
+					for (i = 0; i < baraja.length; i++){
+						if(baraja[i]==null){
+							do{
+								indCan=getRan(39);
+								if(mazo[indCan]!=null){
+									baraja[i]=mazo[indCan];
+									mazo[indCan]=null;
+									break;
+								}
+							}while(mazo[indCan]==null)
+						}
+					}
+				}
+			}
+
+			function ver(baraja){
+				for (i = 0; i < baraja.length; i++)console.log(i+"-"+baraja[i].tipo+"-"+baraja[i].num+"-"+baraja[i].punt);
+			}
+
+			function Duelo(at,de,tri){
+				var gan;
+				if(at.tipo==tri && de.tipo==tri){
+					if(at.punt>de.punt){
+						gan="at";
+					}else gan="de";
+				}else if(at.tipo==tri && de.tipo!=tri){
+					gan="at";
+				}else if(at.tipo!=tri && de.tipo==tri){
+					gan="de";
+				}else{
+					if(at.tipo==de.tipo){
+						if(at.punt>de.punt){
+							gan="at";
+						}else gan="de";
+					}else gan="at";
+				}
+				return gan;
+			}
+
+			function pCar(gan,at,de){
+				for (i = 0; i < gan.length; i++){
+					if(gan[i]==null){
+						gan[i]=at;
+						break;
+					}
+				}
+				for (i = 0; i < gan.length; i++){
+					if(gan[i]==null){
+						gan[i]=de;
+						break;
+					}
+				}
+			}
+
+			function punt(arr){
+				var sum=0;
+				for (i = 0; i < arr.length; i++){
+					if(arr[i]!=null){
+						if(arr[i].num==1)sum+=11;
+						if(arr[i].num==3)sum+=10;
+						if(arr[i].num==12)sum+=4;
+						if(arr[i].num==11)sum+=3;
+						if(arr[i].num==10)sum+=2;
+					}
+				}
+				return sum;
+			}
+
+			function ia(arr,de,tri){
+				var opt=null;
+				for (i = 0; i < arr.length; i++){
+					if(Duelo(de,arr[i],tri)=="de"){
+						opt=i;
+						break;
+					}
+				}
+				if(opt==null)opt=getRan(2);
+				return opt;
+			}
+			
+			function Afun(cl,mazo){
+				Rep(barajaU,mazo);
+				Rep(barajaC,mazo);
+				$("."+cl+"u").html(" ");
+				if(tur==1){
+					dibU(barajaU,"cu",cl-1);
+					indat=cl-1;
+					at=barajaU[indat];
+					indde=ia(barajaC,at,triun.tipo);
+					de=barajaC[indde];
+					dibU(barajaC,"cc",indde);
+					$("."+cl+"u").html(" ");
+					barajaU[indat]=null;
+					barajaC[indde]=null;
+				}else{
+					indde=cl-1;
+					de=barajaU[indde];
+					dibU(barajaU,"cu",cl-1);
+					barajaU[indde]=null;
+				}
+			}
+
+			$(document).ready(function(){
+				var mazo=new Array(40);
+				mazo=llenar();
+				indt=getRan(39);
+				console.log(indt);
+				triun=mazo[indt];
+				dibU(mazo,"vi",indt);
+				console.log("-----"+triun.tipo);
+				Arras(barajaU,mazo);
+				Arras(barajaC,mazo);
+				console.log("**--------");
+				ver(barajaU);
+				console.log("--------");
+				ver(barajaC);
+				
+				$(".1u").click(function(){
+					Afun(1,mazo);
+				});
+				$(".2u").click(function(){
+					Afun(2,mazo);
+				});
+				$(".3u").click(function(){
+					Afun(3,mazo);
+				});
+				
+				$(".due").click(function(){
+					Rep(barajaU,mazo);
+					Rep(barajaC,mazo);
+					if(tur==1){
+						console.log(at.tipo+"-"+at.punt);
+						console.log(de.tipo+"-"+de.punt);
+
+						if(Duelo(at,de,triun.tipo)=="at"){
+							pCar(gbarajaU,at,de);
+							tur=1;
+							$(".cu").html(" ");
+							$(".cc").html(" ");
+							alert("Ganas");
+						}else{
+							pCar(gbarajaC,at,de);
+							tur=2;
+							indat=getRan(2);
+							at=barajaC[indat];
+							dibU(barajaC,"cc",indat);
+							barajaC[indat]=null;
+							$(".cu").html(" ");
+							alert("Pierdes");
+						}
+					}else{
+						
+						if(Duelo(at,de,triun.tipo)=="at"){
+							pCar(gbarajaC,at,de);
+							tur=2;
+							indat=getRan(2);
+							at=barajaC[indat];
+							dibU(barajaC,"cc",indat);
+							barajaC[indat]=null;
+							$(".cu").html(" ");
+							alert("Pierdes");
+						}else{
+							pCar(gbarajaU,at,de);
+							tur=1;
+							$(".cu").html(" ");
+							$(".cc").html(" ");
+							alert("Ganas");
+						}
+					}
+
+					Rep(barajaU,mazo);
+					Rep(barajaC,mazo);
+					console.log("**--------");
+					ver(barajaU);
+					console.log("--------");
+					
+					$(".punU").text(punt(gbarajaU));
+					$(".punC").text(punt(gbarajaC));
+					
+					dibU(barajaU,"1u",0);
+					dibU(barajaU,"2u",1);
+					dibU(barajaU,"3u",2);
+					$(".1c").html("<img src='cartas/r.jpg' >");
+					$(".2c").html("<img src='cartas/r.jpg' >");
+					$(".3c").html("<img src='cartas/r.jpg' >");
+					dibU(mazo,"vi",indt);
+				});
+				console.log("pU");
+				console.log("pC");
+				dibU(mazo,"vi",indt);
+				dibU(barajaU,"1u",0);
+				dibU(barajaU,"2u",1);
+				dibU(barajaU,"3u",2);
+			});
+
+
+			function dibU(barajaU,cl,ind){
+				
+				if(barajaU[ind]!=null){
+					if(barajaU[ind].tipo=="Oro"&&barajaU[ind].num==1)$("."+cl).html("<img src='cartas/oro/1.jpg'>");
+					if(barajaU[ind].tipo=="Oro"&&barajaU[ind].num==2)$("."+cl).html("<img src='cartas/oro/2.jpg'>");
+					if(barajaU[ind].tipo=="Oro"&&barajaU[ind].num==3)$("."+cl).html("<img src='cartas/oro/3.jpg'>");
+					if(barajaU[ind].tipo=="Oro"&&barajaU[ind].num==4)$("."+cl).html("<img src='cartas/oro/4.jpg'>");
+					if(barajaU[ind].tipo=="Oro"&&barajaU[ind].num==5)$("."+cl).html("<img src='cartas/oro/5.jpg'>");
+					if(barajaU[ind].tipo=="Oro"&&barajaU[ind].num==6)$("."+cl).html("<img src='cartas/oro/6.jpg'>");
+					if(barajaU[ind].tipo=="Oro"&&barajaU[ind].num==7)$("."+cl).html("<img src='cartas/oro/7.jpg'>");
+					if(barajaU[ind].tipo=="Oro"&&barajaU[ind].num==10)$("."+cl).html("<img src='cartas/oro/10.jpg'>");
+					if(barajaU[ind].tipo=="Oro"&&barajaU[ind].num==11)$("."+cl).html("<img src='cartas/oro/11.jpg'>");
+					if(barajaU[ind].tipo=="Oro"&&barajaU[ind].num==12)$("."+cl).html("<img src='cartas/oro/12.jpg'>");
+					
+					if(barajaU[ind].tipo=="Copa"&&barajaU[ind].num==1)$("."+cl).html("<img src='cartas/copa/1.jpg'>");
+					if(barajaU[ind].tipo=="Copa"&&barajaU[ind].num==2)$("."+cl).html("<img src='cartas/copa/2.jpg'>");
+					if(barajaU[ind].tipo=="Copa"&&barajaU[ind].num==3)$("."+cl).html("<img src='cartas/copa/3.jpg'>");
+					if(barajaU[ind].tipo=="Copa"&&barajaU[ind].num==4)$("."+cl).html("<img src='cartas/copa/4.jpg'>");
+					if(barajaU[ind].tipo=="Copa"&&barajaU[ind].num==5)$("."+cl).html("<img src='cartas/copa/5.jpg'>");
+					if(barajaU[ind].tipo=="Copa"&&barajaU[ind].num==6)$("."+cl).html("<img src='cartas/copa/6.jpg'>");
+					if(barajaU[ind].tipo=="Copa"&&barajaU[ind].num==7)$("."+cl).html("<img src='cartas/copa/7.jpg'>");
+					if(barajaU[ind].tipo=="Copa"&&barajaU[ind].num==10)$("."+cl).html("<img src='cartas/copa/10.jpg'>");
+					if(barajaU[ind].tipo=="Copa"&&barajaU[ind].num==11)$("."+cl).html("<img src='cartas/copa/11.jpg'>");
+					if(barajaU[ind].tipo=="Copa"&&barajaU[ind].num==12)$("."+cl).html("<img src='cartas/copa/12.jpg'>");
+					
+					if(barajaU[ind].tipo=="Espada"&&barajaU[ind].num==1)$("."+cl).html("<img src='cartas/espada/1.jpg'>");
+					if(barajaU[ind].tipo=="Espada"&&barajaU[ind].num==2)$("."+cl).html("<img src='cartas/espada/2.jpg'>");
+					if(barajaU[ind].tipo=="Espada"&&barajaU[ind].num==3)$("."+cl).html("<img src='cartas/espada/3.jpg'>");
+					if(barajaU[ind].tipo=="Espada"&&barajaU[ind].num==4)$("."+cl).html("<img src='cartas/espada/4.jpg'>");
+					if(barajaU[ind].tipo=="Espada"&&barajaU[ind].num==5)$("."+cl).html("<img src='cartas/espada/5.jpg'>");
+					if(barajaU[ind].tipo=="Espada"&&barajaU[ind].num==6)$("."+cl).html("<img src='cartas/espada/6.jpg'>");
+					if(barajaU[ind].tipo=="Espada"&&barajaU[ind].num==7)$("."+cl).html("<img src='cartas/espada/7.jpg'>");
+					if(barajaU[ind].tipo=="Espada"&&barajaU[ind].num==10)$("."+cl).html("<img src='cartas/espada/10.jpg'>");
+					if(barajaU[ind].tipo=="Espada"&&barajaU[ind].num==11)$("."+cl).html("<img src='cartas/espada/11.jpg'>");
+					if(barajaU[ind].tipo=="Espada"&&barajaU[ind].num==12)$("."+cl).html("<img src='cartas/espada/12.jpg'>");
+					
+					if(barajaU[ind].tipo=="Basto"&&barajaU[ind].num==1)$("."+cl).html("<img src='cartas/basto/1.jpg'>");
+					if(barajaU[ind].tipo=="Basto"&&barajaU[ind].num==2)$("."+cl).html("<img src='cartas/basto/2.jpg'>");
+					if(barajaU[ind].tipo=="Basto"&&barajaU[ind].num==3)$("."+cl).html("<img src='cartas/basto/3.jpg'>");
+					if(barajaU[ind].tipo=="Basto"&&barajaU[ind].num==4)$("."+cl).html("<img src='cartas/basto/4.jpg'>");
+					if(barajaU[ind].tipo=="Basto"&&barajaU[ind].num==5)$("."+cl).html("<img src='cartas/basto/5.jpg'>");
+					if(barajaU[ind].tipo=="Basto"&&barajaU[ind].num==6)$("."+cl).html("<img src='cartas/basto/6.jpg'>");
+					if(barajaU[ind].tipo=="Basto"&&barajaU[ind].num==7)$("."+cl).html("<img src='cartas/basto/7.jpg'>");
+					if(barajaU[ind].tipo=="Basto"&&barajaU[ind].num==10)$("."+cl).html("<img src='cartas/basto/10.jpg'>");
+					if(barajaU[ind].tipo=="Basto"&&barajaU[ind].num==11)$("."+cl).html("<img src='cartas/basto/11.jpg'>");
+					if(barajaU[ind].tipo=="Basto"&&barajaU[ind].num==12)$("."+cl).html("<img src='cartas/basto/12.jpg'>");
+				}
+
+			}
+		</script>
+	</body>
+</html>

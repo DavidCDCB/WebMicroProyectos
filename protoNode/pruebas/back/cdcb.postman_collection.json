@@ -1,0 +1,232 @@
+{
+	"info": {
+		"_postman_id": "ee727c54-e9b9-48ab-a693-715cda1a117d",
+		"name": "cdcb",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "http://localhost:3000/ApiDb/articulos  PUT",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\t\"criterio\":{\"_id\":\"5f1b93e1e8ca2c25b0af793f\"},\r\n\t\"datoNuevo\":{\r\n\t  \"descripciones\": [\r\n\t\t{\r\n\t\t  \"nombre\": \"Empuñadura goma suave proporciona una mayor comodidad en el trabajo\"\r\n\t\t},\r\n\t\t{\r\n\t\t  \"nombre\": \"Diseño compacto y ergonomico\"\r\n\t\t},\r\n\t\t{\r\n\t\t  \"nombre\": \"solo pesa 3,4 kg con bateria\"\r\n\t\t}\r\n\t  ],\r\n\t  \"imagenes\": [\r\n\t\t\"https://cdn.totalcode.com/easy/product-zoom/es/taladro-percutor-3~8%22-tm505-0_2800-rpm-500w-x120v-2.jpg\",\r\n\t\t\"https://agroazulsmiguelhnos.com/wp-content/uploads/2019/04/120-27.png\"\r\n\t  ],\r\n\t  \"nombre\": \"taladro\",\r\n\t  \"categoria\": \"ferreteria\",\r\n\t  \"cantidad\": \"200\",\r\n\t  \"marca\": \"black & decker\",\r\n\t  \"color\": \"naranja\",\r\n\t  \"precio\": \"100000\",\r\n\t  \"valoracion\": \"1\",\r\n\t  \"compras\": \"1000\",\r\n\t  \"__v\": 0\r\n\t}\r\n}\r\n"
+				},
+				"url": {
+					"raw": "http://localhost:3000/ApiDb/articulos/crud",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"ApiDb",
+						"articulos",
+						"crud"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:3000/ApiDb/articulos/crud",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"_id\":\"5f1b937a49d55c2528b0d742\"}"
+				},
+				"url": {
+					"raw": "http://localhost:3000/ApiDb/articulos/crud",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"ApiDb",
+						"articulos",
+						"crud"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:3000/ApiDb/articulos/crud",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"_id\": \"5f1c95ab2ced501a6856be35\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/ApiDb/articulos/crud",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"ApiDb",
+						"articulos",
+						"crud"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:3000/ApiDb/articulos/crud",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"url": {
+					"raw": "http://localhost:3000/ApiDb/articulos/crud",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"ApiDb",
+						"articulos",
+						"crud"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Insercion http://localhost:3000/ApiDb/articulos",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"_id\": {\r\n    \"$oid\": \"5ea9a94c8887a932a4f918d2\"\r\n  },\r\n  \"descripciones\": [\r\n    {\r\n      \"nombre\": \"Destornillador de punta imantada con garantia de 1 año\"\r\n    },\r\n    {\r\n      \"nombre\": \"el extremo del mango esta marcado para identificar la herramienta\"\r\n    }\r\n  ],\r\n  \"imagenes\": [\r\n    \"https://i.linio.com/p/c9c8a8bcc21d587c57622239eef5bde2-zoom.jpg\",\r\n    \"https://www.ecured.cu/images/thumb/f/ff/Destornillador1.jpg/260px-Destornillador1.jpg\"\r\n  ],\r\n  \"nombre\": \"destornillador estrella\",\r\n  \"categoria\": \"ferreteria\",\r\n  \"cantidad\": 1000,\r\n  \"marca\": \"pretul\",\r\n  \"color\": \"azul\",\r\n  \"precio\": 20000,\r\n  \"valoracion\": 3,\r\n  \"compras\": 100,\r\n  \"__v\": 0\r\n}"
+				},
+				"url": {
+					"raw": "http://localhost:3000/ApiDb/articulos",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"ApiDb",
+						"articulos"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "RegistrioUsuario",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\t\"names\": \"David\",\r\n\t\"lastNames\": \"cruz\",\r\n\t\"address\": \"dsadsa\",\r\n\t\"email\": \"Cristian@hotmail.com\",\r\n\t\"password\": \"cdcb\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/ApiDb/usuarios/registrar",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"ApiDb",
+						"usuarios",
+						"registrar"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "login",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\t\"email\":\"sadewsad2\",\r\n\t\"password\":\"DAVID\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/ApiDb/usuarios/login",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"ApiDb",
+						"usuarios",
+						"login"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}

@@ -1,0 +1,3 @@
+2017/10/13-05:57:49.604 5101 Reusing MANIFEST /home/david-cdcb/.config/chromium/Default/IndexedDB/file__0.indexeddb.leveldb/MANIFEST-000001
+2017/10/13-05:57:49.604 5101 Recovering log #3
+2017/10/13-05:57:49.768 5101 Reusing old log /home/david-cdcb/.config/chromium/Default/IndexedDB/file__0.indexeddb.leveldb/000003.log 

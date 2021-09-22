@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+    	<meta charset="utf-8">
+       	<title>SBP</title>
+       	<link  rel="shortcut icon" href="logo.png">
+    </head>
+<body onload='CrearBd()' bgcolor="black" >
+	<div id="bg">
+		<div id="ven" ONDBLCLICK="vEnc()">
+			<H1><p id="ti" align="center">SISTEMA BÁSICO DE PRÉSTAMOS(SBP)<img src="logo.png" height="90" width="90"></p></H1>
+			<input type="password" onfocus="Log()" id="pass" placeholder="Contraseña" /><br>
+			<button id="btnl" onclick="pass()" >Ingresar</button></br>
+		</div>
+	</div>
+
+	<div  id="in" align="left"; >
+
+		<table id="tabla">
+			<tr>
+				<td>
+					<label for="cod" >Datos Principales:</label>
+					<input type="text" id="nombre" placeholder="Nombre Cliente " />
+					<input type="text" id="celular" onblur="limpia('celular')" placeholder="Celular" />
+				</td>
+
+			</tr>
+
+			<tr>
+				<td>
+				<label for="cod" >Datos Monetarios:</label>
+				<input type="text" id="prestamo" onblur="limpia('prestamo')" placeholder="Valor de Prestamo"  /><label for="cod" >.000</label>
+				<input type="text" id="cantidadC" onblur="limpia('cantidadC')" placeholder="Numero de Cuotas" />
+				</td>
+			</tr>
+		</table>
+		<br></br>
+		<label for="fp" >Fecha Préstamo:</label>
+		<input type="date" id="fp" placeholder="Fecha Prestamo" /><br></br>
+		<label for="f1" >Fecha 1:</label>
+		<input type="date" id="f1" placeholder="Fecha 1"/>
+		<label for="f2" >Fecha 2:</label>
+		<input type="date" id="f2" placeholder="Fecha 2" />
+		<label for="f3" >Fecha 3:</label>
+		<input type="date" id="f3" placeholder="Fecha 3" /><br></br>
+		<label for="f4" >Fecha 4:</label>
+		<input type="date" id="f4" placeholder="Fecha 4" />
+		<label for="f5" >Fecha 5:</label>
+		<input type="date" id="f5" placeholder="Fecha 5" />
+		<label for="f6" >Fecha 6:</label>
+		<input type="date" id="f6" placeholder="Fecha 6" />
+
+		<div id="s">
+			<button id="save" onclick="add()" title="Guardar" ><img src="save.png" height="30" width="30"></button>
+		</div>
+	</div>
+	<div id="elements" align="center">
+		<label id="inv" title="Monto de dinero invertido en los prestamos" align="center">Invertido:</label>
+		<label id="gan" title="Cantidad de ganancia de acuerdo al interés" align="center">Ganancias:</label>
+		<label id="tot" title="Monto total de dinero registrado" align="center">Total:</label>
+		<table id="consulta" border=1>
+			<caption>BD Personas</caption>
+			<thead bgcolor="#0423C7">
+				<tr>
+					<th>Nombre</th>
+					<th>Celu</th>
+					<th>Valor Prestamo</th>
+					<th>Numero Cuotas</th>
+					<th>Fecha Prestamo</th>
+					<th>Valor Cuota</th>
+					<th>Ganancia</th>
+					<th>Opciones </th>
+				</tr>
+			</thead>
+			<tbody id="elementsList">
+				<tr>
+					<td colspan="3">Ingrese contraseña para ver información</td>
+				</tr>
+			</tbody>
+		</table>
+		<br></br>
+		<label align="right">By CDCB Diseño de interfaces 2018-1</label>
+	</div>
+	<br></br>
+
+	<style type="text/css">
+
+		body{
+			font-family:'Helvetica','Verdana','Monaco',sans-serif;
+			text-align: center;
+			background: url("13.jpg") no-repeat center center fixed;
+			-webkit-background-size: cover;
+			-moz-background-size: cover;
+			-o-background-size: cover;
+		}
+
+		#bg{
+			background: rgba(0,0,0,0.7);
+			width: 100%;
+			height: 100%;
+			position: fixed;
+			z-index: 1;
+			top: 0px;
+			left: 0px;
+		}
+
+		#ven{
+			background-color: rgba(114,223,239,0.9);
+			opacity: 0.9;
+			box-shadow: 8px 8px 8px #2C6EFF;
+			position: absolute;
+			margin: 5px 320px;
+			top: 20%;
+			padding:20px;
+			border-radius: 20px;
+		}
+
+		#consulta{
+			background-color: #1672B5;
+			color: white;
+			font-weight:bold;
+			border-radius: 6px;
+			border: 2px solid #A0A2A4;
+		}
+
+		#in{
+			border-radius: 10px;
+			border: 2px solid #005C95;
+			margin: 40px 305px;
+			padding: 10px;
+			color: white;
+		}
+
+		button{
+			background-color: #A3C1D7;
+			color: balck;
+			border-radius: 6px;
+			border: 2px solid #005C95;
+			font-weight: 600;
+			font-size: 20px;
+			margin: 10px
+			transition-property: all;
+			transition-duration: 300ms;
+			transition-timing-function: ease-out;
+			transition-delay: 20ms;
+		}
+
+		button:hover{
+			color: #1672B5;
+			background-color: white;
+			cursor:pointer;
+
+		}
+		label{
+			font-weight:bold;
+		}
+
+		#fp,#f1,#f2,#f3,#f4,#f5,#f6{
+			width: 127px;
+		}
+
+		#s{
+			text-align: right;
+			display: inline-block;
+		}
+
+		#save{
+			margin: 5px 20px;
+		}
+
+		#pass, #btnl{
+			width: 150px;
+			height: 30px;
+			font-size: 25px;
+			margin: 5px;
+		}
+
+		h1{
+			text-shadow: 2px 2px 0px #122CC5;
+		}
+
+		#gan,#inv,#tot{
+			background-color: #008AEC;
+			border-radius: 3px;
+			color: white;
+			font-size: 30px;
+			text-align: center;
+			margin: 30px;
+		}
+
+		input{
+			margin: 1px;
+			background-color: white;
+			border-radius: 6px;
+			font-size:1em;
+			transition-property: all;
+			transition-duration: 300ms;
+			transition-timing-function: ease-out;
+			transition-delay: 20ms;
+		}
+
+		#prestamo{
+			width: 158px;
+		}
+
+		input:focus{
+			margin: 5px;
+			background-color: white;
+			border-radius: 6px;
+			font-size:1em;
+			border: 2px solid #87cefa;
+			box-shadow: 5px 5px 5px rgba(24,24,24,.5);
+		}
+
+
+	</style>
+
+	<script>
+		var indexedDB = window.indexedDB || window.mozIndexedDB || window.webkitIndexedDB || window.msIndexedDB;
+		var dataBase = null;
+		var interes=20;
+
+
+		function vEnc(){
+			var v=prompt();
+			alert(encriptar(v,10));
+		}
+
+		function vT(p,g){
+			var r=parseFloat(p+g);
+			return r;
+		}
+
+		function cGan(val){
+			return (parseFloat((val*interes)/100));
+		}
+
+		function vC(vt,cu){
+			return parseFloat(vt/cu);
+		}
+
+		function pass(){
+			if(document.getElementById("pass").value!="hola"){
+				document.querySelector("#pass").value="";
+				document.getElementById("pass").style.backgroundColor= "red" ;
+			}else{
+				loadAll();
+				document.getElementById("save").disabled=false;
+				document.getElementById("pass").style.display = 'none';
+				document.getElementById("btnl").style.display = 'none';
+				document.getElementById("ti").style.display = 'none';
+				document.getElementById("bg").style.display = 'none';
+				hide("block");
+			}
+		}
+
+		function validar(){
+			if(document.getElementById("nombre").value===""||
+				document.getElementById("celular").value===""||
+				document.getElementById("prestamo").value===""||
+				document.getElementById("cantidadC").value===""){
+				return false;
+			}else{
+				return true;
+			}
+		}
+
+		function limpia(str) {
+			var val = document.getElementById(str).value;
+			var tam = val.length;
+			for(i = 0; i < tam; i++)
+				if(isNaN(val[i])&&val[i]!=",")
+					document.getElementById(str).value = '';
+		}
+
+
+		function encriptar(str,des){
+			var ch=[str.length];
+			var str1="";
+			for(i in str)
+				ch[i]=str.charCodeAt(i)+des;
+			for(i in ch)
+				str1+=String.fromCharCode(ch[i]);
+			return str1;
+		}
+
+		function desEncriptar(ch,des){
+			var str1="";
+			var ch1=[ch.length];
+			for(i in ch)
+				ch1[i]=ch.charCodeAt(i);
+			for(i in ch1)
+				str1+=String.fromCharCode(ch1[i]-des);
+			return str1;
+		}
+
+		function CrearBd(){
+
+			dataBase = indexedDB.open("object1", 1);//Crea la el almacen de objetos con un nombre y version
+
+			dataBase.onupgradeneeded = function (e) {
+				var active = dataBase.result;//enlace de activacion
+				var object = active.createObjectStore("people", { keyPath : 'id', autoIncrement : true });//llave primaria
+				//al bojeto con su llave primaria se le agregan los indices
+				object.createIndex('by_nombre', 'nombre', { unique : true });
+				object.createIndex('by_celular', 'celular', { unique : false });
+				object.createIndex('by_prestamo', 'prestamo', { unique : false });
+				object.createIndex('by_cantidadC', 'cantidadC', { unique : false });
+				//object.createIndex('by_valorC', 'valorC', { unique : false });
+				object.createIndex('by_ganancia', 'ganancia', { unique : false });
+				object.createIndex('by_fp', 'fp', { unique : false });
+				object.createIndex('by_f1', 'f1', { unique : false });
+				object.createIndex('by_f2', 'f1', { unique : false });
+				object.createIndex('by_f3', 'f3', { unique : false });
+				object.createIndex('by_f4', 'f4', { unique : false });
+				object.createIndex('by_f5', 'f5', { unique : false });
+				object.createIndex('by_f6', 'f6', { unique : false });
+			};
+
+			dataBase.onsuccess = function (e) {//Evento de completado
+				document.querySelector("#in").setAttribute('style', 'background-color: rgba(25,105,191,0.9);');
+				document.getElementById("save").disabled=true;
+				document.getElementById("pass").focus();
+				hide("none");
+			};
+
+			dataBase.onerror = function (e)  {
+				alert('Error cargando la base de datos: '+e);
+			};
+		}
+
+		function hide(opt){
+			document.getElementById("in").style.display = opt;
+			document.getElementById("elements").style.display = opt;
+		}
+
+		function add() {
+			var array = new Array();
+			array.push({pepe:1,da:"d"});//Agregar un objeto al array
+
+			var gan=cGan(document.querySelector("#prestamo").value)*1000;
+			var vt=parseFloat(document.querySelector("#prestamo").value*1000)+parseFloat(gan);
+			var vCu=vC(vt,document.querySelector("#cantidadC").value);
+			var active = dataBase.result;//enlace de activacion
+			var data = active.transaction(["people"], "readwrite");//transicion de cambios
+			var object = data.objectStore("people");
+			if(validar()){
+				var request = object.put({//Captura de datos y asignacion
+					nombre: document.querySelector("#nombre").value,
+					celular: document.querySelector("#celular").value,
+					prestamo: document.querySelector("#prestamo").value*1000,
+					cantidadC: document.querySelector("#cantidadC").value,
+					valorC: vCu,
+					ganancia: gan,
+					fp: document.querySelector("#fp").value,
+					f1: document.querySelector("#f1").value,
+					f2: document.querySelector("#f2").value,
+					f3: document.querySelector("#f3").value,
+					f4: document.querySelector("#f4").value,
+					f5: document.querySelector("#f5").value,
+					f6: document.querySelector("#f6").value,
+
+				});
+			}else{
+				alert("Faltan datos");
+			}
+
+			request.onerror = function (e) {
+				alert(request.error.nombre + '\n\n' + request.error.message);
+			};
+
+			data.oncomplete = function (e) {
+				alert('Cliente agregado correctamente');
+				loadAll();
+				limpiar();
+				window.scrollBy(0,window.innerHeight*5);
+			};
+
+		}
+
+		function Log(){
+			document.getElementById("pass").addEventListener('keydown', function (e) {
+				if (e.keyCode == 13) {
+					pass();
+				}
+			});
+			document.getElementById("pass").addEventListener('mouseover', function (e) {
+				document.getElementById("pass").focus();});
+			document.getElementById("nombre").addEventListener('mouseover', function (e) {
+				document.getElementById("nombre").focus();});
+			document.getElementById("celular").addEventListener('mouseover', function (e) {
+				document.getElementById("celular").focus();});
+			document.getElementById("prestamo").addEventListener('mouseover', function (e) {
+				document.getElementById("prestamo").focus();});
+			document.getElementById("prestamo").addEventListener('mouseover', function (e) {
+				document.getElementById("prestamo").focus();});
+			document.getElementById("cantidadC").addEventListener('mouseover', function (e) {
+				document.getElementById("cantidadC").focus();});
+
+		}
+
+		function limpiar(){
+			document.querySelector("#nombre").value = "";
+			document.querySelector("#celular").value = "";
+			document.querySelector("#prestamo").value = "";
+			document.querySelector("#cantidadC").value = "";
+			//document.querySelector("#valorC").value = "";
+			document.querySelector("#fp").value = "";
+			document.querySelector("#f1").value = "";
+			document.querySelector("#f2").value = "";
+			document.querySelector("#f3").value = "";
+			document.querySelector("#f4").value = "";
+			document.querySelector("#f5").value = "";
+			document.querySelector("#f6").value = "";
+		}
+
+		function loadAll() {
+			var active = dataBase.result;
+			var data = active.transaction(["people"], "readonly");
+			var object = data.objectStore("people");
+			var elements = [];
+			var sum=0,sum1=0;
+
+			object.openCursor().onsuccess = function (e) {//Creacion de puntero para recorrer datos
+
+				var result = e.target.result;
+
+				if (result === null) {
+					return;
+				}
+				elements.push(result.value);//Regoleccion de informacion a traves de puntero
+				result.continue();
+			};
+
+			data.oncomplete = function () {
+				var outerHTML = '';
+				var cam;
+
+				for (var key in elements) {//Iteracion en la recoleccion
+					sum+=elements[key].ganancia;
+					sum1+=parseFloat(elements[key].prestamo);
+					if(key%2!=0){
+						outerHTML += '\n\
+						<tr BGCOLOR="#2F9BFF" >\n\
+							<td BGCOLOR="#2F9BFF" ONDBLCLICK="window.scrollBy(0,-window.innerHeight);"> ' + elements[key].nombre + '</td>\n\
+							<td BGCOLOR="#2F9BFF"> ' + elements[key].celular + '</td>\n\
+							<td BGCOLOR="#2F9BFF">' + cNum(elements[key].prestamo) + '</td>\n\
+							<td BGCOLOR="#2F9BFF">' + elements[key].cantidadC + '</td>\n\
+							<td BGCOLOR="#2F9BFF">' + elements[key].fp + '</td>\n\
+							<td BGCOLOR="#2F9BFF">' + cNum(elements[key].valorC) + '</td>\n\
+							<td BGCOLOR="#2F9BFF">' + cNum(elements[key].ganancia) + '</td>\n\
+							<td>\n\
+								<button type="button" title="Ver Fechas" onclick="load(' + elements[key].id + ')"><img src="date.png" height="30" width="30"></button>\n\
+								<button type="button" title="Modificar" onclick="Update(' + elements[key].id + ')"><img src="up.png" height="30" width="30"></button>\n\
+								<button type="button" title="Eliminar" ONDBLCLICK="Delete(' + elements[key].id + ')"><img src="del.png" height="30" width="30"></button>\n\
+							</td>\n\
+						</tr>';
+					}else{
+						outerHTML += '\n\
+						<tr onclick="$(this).hide();">\n\
+							<td ONDBLCLICK="window.scrollBy(0,-window.innerHeight);">' + elements[key].nombre + '</td>\n\
+							<td>' + elements[key].celular + '</td>\n\
+							<td>' + cNum(elements[key].prestamo) + '</td>\n\
+							<td>' + elements[key].cantidadC + '</td>\n\
+							<td>' + elements[key].fp + '</td>\n\
+							<td>' + cNum(elements[key].valorC) + '</td>\n\
+							<td>' + cNum(elements[key].ganancia) + '</td>\n\
+							<td>\n\
+								<button type="button" title="Ver Fechas" onclick="load(' + elements[key].id + ')"><img src="date.png" height="30" width="30"></button>\n\
+								<button type="button" title="Modificar" onclick="Update(' + elements[key].id + ')"><img src="up.png" height="30" width="30"></button>\n\
+								<button type="button" title="Eliminar" ONDBLCLICK="Delete(' + elements[key].id + ')"><img src="del.png" height="30" width="30"></button>\n\
+							</td>\n\
+						</tr>';
+					}
+				}
+				document.querySelector("#inv").innerHTML = "Invertido: "+cNum(sum1)+"$";
+				document.querySelector("#gan").innerHTML = "Ganancias: "+cNum(sum)+"$";
+				document.querySelector("#tot").innerHTML = "Total: "+cNum(sum+sum1)+"$";
+				elements = [];
+				document.querySelector("#elementsList").innerHTML = outerHTML;
+			};
+		}
+
+		function cNum(n){
+			var num=String(n);
+			var cN="",rnum="";
+			for(var i=num.length-1;i>=0;i--){
+				if(i==num.length-4||i==num.length-7)cN+=".";
+				cN+=num[i];
+			}
+			for(var i=cN.length-1;i>=0;i--){
+				rnum+=cN[i];
+			}
+			return rnum;
+		}
+
+
+		function loadBycedula(cedula){
+			var active = dataBase.result;
+			var data = active.transaction(["people"], "readonly");
+			var object = data.objectStore("people");
+			var index = object.index("by_cedula");
+			var request = index.get(String(cedula));
+
+			request.onsuccess = function () {
+				var result = request.result;
+
+				if (result !== undefined) {
+					alert("ID: " + result.id + "\n\
+						   cedula: " + result.cedula + "\n\
+						   nombre: " + result.nombre + "\n\
+						   apellido: " + result.apellido);
+				}
+			};
+		}
+
+		function load(id) {//Captura de datos de un objeto especifico
+			var active = dataBase.result;
+			var data = active.transaction(["people"], "readonly");
+			var object = data.objectStore("people");
+
+			var request = object.get(parseInt(id));//Especificacion de objeto
+
+			request.onsuccess = function () {
+				var result = request.result;
+
+				if (result !== undefined) {
+					alert("ID: " + result.id + "\n\
+					   Fecha Prestamo: " + result.fp + "\n\
+					   Fecha 1: " + result.f1 + "\n\
+					   Fecha 2: " + result.f2 + "\n\
+					   Fecha 3: " + result.f3 + "\n\
+					   Fecha 4: " + result.f4 + "\n\
+					   Fecha 5: " + result.f5 + "\n\
+					   Fecha 6: " + result.f6);
+				}
+			};
+		}
+
+		function Delete(id){
+			var active = dataBase.result;
+
+			if (confirm("Seguro?") == true) {
+				var request = active.transaction(["people"], "readwrite").objectStore("people").delete(id);
+				loadAll();
+			}
+		}
+
+		function Update(id){
+
+			var active = dataBase.result;
+			var data = active.transaction(["people"], "readonly");
+			var object = data.objectStore("people");
+
+			var request = object.get(parseInt(id));
+
+			request.onsuccess = function () {
+				var result = request.result;
+
+				if (result !== undefined) {
+					document.querySelector("#nombre").value = result.nombre;
+					document.querySelector("#celular").value = result.celular;
+					document.querySelector("#prestamo").value = (result.prestamo/1000);
+					document.querySelector("#cantidadC").value = result.cantidadC;
+					//document.querySelector("#valorC").value = result.valorC;
+					document.querySelector("#fp").value = result.fp;
+					document.querySelector("#f1").value = result.f1;
+					document.querySelector("#f2").value = result.f2;
+					document.querySelector("#f3").value = result.f3;
+					document.querySelector("#f4").value = result.f4;
+					document.querySelector("#f5").value = result.f5;
+					document.querySelector("#f6").value = result.f6;
+				}
+				window.scrollBy(0,-window.innerHeight);
+				Delete(id);
+			};
+		}
+
+		function Ganancias(){
+			var active = dataBase.result;
+			var data = active.transaction(["people"], "readonly");
+			var object = data.objectStore("people");
+			var elements = [];
+			var sum=0;
+			object.openCursor().onsuccess = function (e) {
+				var result = e.target.result;
+				if (result === null) {
+					return;
+				}
+				elements.push(result.value);
+				result.continue();
+
+			};
+			for (var key in elements) {
+				sum+=elements[key].ganancia;
+			}
+			return sum;
+		}
+
+		function Tabla(){
+
+			var tab = document.getElementById("tabla");
+
+			var fil = tab.insertRow(1);
+			var cell1 = fil.insertCell(0);
+			var cell2 = fil.insertCell(1);
+			cell1.innerHTML = "NEW CELL1";
+			cell2.innerHTML = "NEW CELL2";
+		}
+	</script>
+</body>
+</html>
